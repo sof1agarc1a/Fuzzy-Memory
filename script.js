@@ -1,42 +1,37 @@
 'use strict';
 
 const cards = [
-  { name: 'SpongeBob', color: '#ffb3ba', nr: 1 },
-  { name: 'Patrick', color: '#FFF9C7', nr: 2 },
-  { name: 'Squidward', color: '#ffdfba', nr: 3 },
-  { name: 'Gary', color: '#FF4859', nr: 4 },
-  { name: 'Plankton', color: '#FF9145', nr: 5 },
-  { name: 'Pearl', color: '#D7BDFF', nr: 6 },
-  { name: 'Sandy', color: 'pink', nr: 7 },
-  { name: 'Mr. Krabs', color: 'red', nr: 8 },
-  { name: 'SpongeBob', color: '#ffb3ba', nr: 1 },
-  { name: 'Patrick', color: '#FFF9C7', nr: 2 },
-  { name: 'Squidward', color: '#ffdfba', nr: 3 },
-  { name: 'Gary', color: '#FF4859', nr: 4 },
-  { name: 'Plankton', color: '#FF9145', nr: 5 },
-  { name: 'Pearl', color: '#D7BDFF', nr: 6 },
-  { name: 'Mrs. Puff', color: 'pink', nr: 7 },
-  { name: 'Mr. Krabs', color: 'red', nr: 8 },
-  { name: 'hidden picture', }
+  { img: 'images/spongebob.jpg', nr: 1 },
+  { img: 'images/squidward.jpg', nr: 2 },
+  { img: 'images/patrick.jpg', nr: 3 },
+  { img: 'images/gary.jpg', nr: 4 },
+  { img: 'images/mr_krabs.png', nr: 5 },
+  { img: 'images/pearl.jpg', nr: 6 },
+  { img: 'images/plankton.png', nr: 7 },
+  { img: 'images/sandy.png', nr: 8 },
+  { img: 'images/spongebob.jpg', nr: 1 },
+  { img: 'images/squidward.jpg', nr: 2 },
+  { img: 'images/patrick.jpg', nr: 3 },
+  { img: 'images/gary.jpg', nr: 4 },
+  { img: 'images/mr_krabs.png', nr: 5 },
+  { img: 'images/pearl.jpg', nr: 6 },
+  { img: 'images/plankton.png', nr: 7 },
+  { img: 'images/sandy.png', nr: 8 },
 ];
 
-cards.sort(function() {
-  return Math.random() - Math.random()
-});
+// cards.sort(function() {
+//   return Math.random() - Math.random()
+// });
 
 const container = document.querySelector('.container');
 
 for(let card of cards) {
-  const createCard = (color, title, number) => {
+  const createCard = (img, datanumber) => {
     return `
-    <div class="cards" data-card="${number}">
-      <p class="card"> ${title} </p>
-      <p class="card"> ${color} </p>
+    <div class="cards" data-card="${datanumber}">
+      <img class="front-card" src="images/frontCard.png" alt="error">
+      <img class="hidden-card" src="${img}" alt="error">
     </div>`;
-
   };
-  container.innerHTML += (createCard(card.color, card.name, card.nr));
+  container.innerHTML += (createCard(card.img, card.nr));
 };
-
-
-// för att "vända" kortet, gör div mindre, sen större och byt färg vid klick?
