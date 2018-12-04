@@ -19,11 +19,14 @@ const cardsDiv = [
   { img: 'images/sandy.png', nr: 8 },
 ];
 
+let shuffle = cardsDiv.sort(() => Math.random() - Math.random());
+
 const container = document.querySelector('.container');
+
 for(let cardDiv of cardsDiv) {
   const createCard = (img, nr) => {
     return `
-    <div class="cards" data-number="${nr}">
+    <div class="display cards" data-number="${nr}">
       <img class="front-card" src="images/frontCard.png" alt="error">
       <img class="hidden-card" src="${img}" alt="error">
     </div>`;
@@ -34,11 +37,15 @@ for(let cardDiv of cardsDiv) {
 
 const startGame = document.querySelector('.start-game')
 
-
+const hideCards = document.querySelectorAll('.cards')
 
 startGame.addEventListener('click', () => {
   const minutes = document.querySelector(".minutes")
   const seconds = document.querySelector(".seconds")
+  startGame.classList.add('display');
+
+  hideCards.forEach(hiddenCard => hiddenCard.classList.remove('display'));
+
   let count = 0;
   const timer = () => {
     count += 1;
@@ -46,15 +53,11 @@ startGame.addEventListener('click', () => {
     seconds.innerHTML = (count%60).toString().padStart(2, "0");
   }
   const getTime = setInterval(timer, 1000);
-
-  startGame.classList.add('display');
 });
-
-
 
 const cards = document.querySelectorAll('.cards');
 
-
+cards.forEach(card => card.addEventListener('click', clickCard));
 
 let clicked = false;
 let firstClick, secondClick;
@@ -86,50 +89,63 @@ function checkCardMatch() {
     resetClick();
   }, 900);
   } else {
-    firstClick.removeEventListener('click', clickCard);
-    secondClick.removeEventListener('click', clickCard);
     resetClick();
     points++;
 
     if(points === 1) {
       function addClass() {
-        clearInterval(timer);
         let winwin = document.querySelectorAll(".cards");
         if(winwin[0]) {
           winwin[0].className = "winwin";
-          setTimeout(addClass, 80);
-
-          if(winwin.className === "winwin") {
-            console.log(winwin);
-            winwin.classList.add('display');
-
-          }
+          setTimeout(addClass, 70);
         }
       }
-      // let winwin = document.querySelector(".cards");
       setTimeout(addClass, 1000);
-      // winwin.classList.add('cards');
+
+          const replayButton = document.querySelector('.replay-button')
+          const replayGame = document.querySelector('.replay')
+
+          setTimeout(() => {
+            let winDisplayNone = document.querySelectorAll(".winwin");
+            winDisplayNone.forEach(replace => replace.classList.add('display'));
+
+            replayGame.classList.remove('display');
+            replayButton.classList.remove('display');
+          }, 3400);
+
+          replayButton.addEventListener('click', () => {
 
 
-      // let cardsBack = document.querySelector(".winwin");
-      // console.log(cardsBack);
-      // cardsBack.classList.remove('winwin');
+
+            replayGame.classList.add('display');
+            points = 0;
+
+              function addAnimation() {
+                let winwin = document.querySelectorAll(".winwin");
+                if(winwin[0]) {
+                  winwin[0].className = "replay-animation";
+                  setTimeout(addAnimation, 70);
+                }
+              }
+              setTimeout(addAnimation, 10);
+
+              setTimeout(() => {
+                let replaceAll = document.querySelectorAll(".replay-animation");
+                replaceAll.forEach(replace => replace.classList.add('cards'));
+                replaceAll.forEach(replace => replace.classList.remove('replay-animation'));
+
+                // shuffle.sort(() => Math.random() - Math.random());
+
+              }, 2200);
+
+
+
+        });
+      }
     }
-  }
-};
-
-
+  };
 
 function resetClick() {
   [clicked, disableClickCard] = [false, false];
   [firstClick, secondClick] = [null, null];
 }
-
-// (function shuffle() {
-//   cards.forEach(card => {
-//     let randomOrder = Math.floor(Math.random() * 16);
-//     card.style.order = randomOrder;
-//   });
-// })();
-
-cards.forEach(card => card.addEventListener('click', clickCard));
