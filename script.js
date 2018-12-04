@@ -31,7 +31,30 @@ for(let cardDiv of cardsDiv) {
   container.innerHTML += (createCard(cardDiv.img, cardDiv.nr));
 };
 
-const cards = document.querySelectorAll('.cards')
+
+const startGame = document.querySelector('.start-game')
+
+
+
+startGame.addEventListener('click', () => {
+  const minutes = document.querySelector(".minutes")
+  const seconds = document.querySelector(".seconds")
+  let count = 0;
+  const timer = () => {
+    count += 1;
+    minutes.innerHTML = Math.floor(count/60).toString().padStart(2, "0");
+    seconds.innerHTML = (count%60).toString().padStart(2, "0");
+  }
+  const getTime = setInterval(timer, 1000);
+
+  startGame.classList.add('display');
+});
+
+
+
+const cards = document.querySelectorAll('.cards');
+
+
 
 let clicked = false;
 let firstClick, secondClick;
@@ -42,7 +65,6 @@ function clickCard() {
   if(this === firstClick) return;
   this.classList.add('card-click');
 
-
   if(clicked === false) {
     clicked = true;
     firstClick = this;
@@ -52,6 +74,8 @@ function clickCard() {
     checkCardMatch();
   }
 };
+
+let points = 0;
 
 function checkCardMatch() {
   if(firstClick.dataset.number != secondClick.dataset.number) {
@@ -65,20 +89,47 @@ function checkCardMatch() {
     firstClick.removeEventListener('click', clickCard);
     secondClick.removeEventListener('click', clickCard);
     resetClick();
+    points++;
+
+    if(points === 1) {
+      function addClass() {
+        clearInterval(timer);
+        let winwin = document.querySelectorAll(".cards");
+        if(winwin[0]) {
+          winwin[0].className = "winwin";
+          setTimeout(addClass, 80);
+
+          if(winwin.className === "winwin") {
+            console.log(winwin);
+            winwin.classList.add('display');
+
+          }
+        }
+      }
+      // let winwin = document.querySelector(".cards");
+      setTimeout(addClass, 1000);
+      // winwin.classList.add('cards');
+
+
+      // let cardsBack = document.querySelector(".winwin");
+      // console.log(cardsBack);
+      // cardsBack.classList.remove('winwin');
+    }
   }
 };
+
+
 
 function resetClick() {
   [clicked, disableClickCard] = [false, false];
   [firstClick, secondClick] = [null, null];
 }
 
+// (function shuffle() {
+//   cards.forEach(card => {
+//     let randomOrder = Math.floor(Math.random() * 16);
+//     card.style.order = randomOrder;
+//   });
+// })();
 
 cards.forEach(card => card.addEventListener('click', clickCard));
-
-(function shuffle() {
-  cards.forEach(card => {
-    let randomOrder = Math.floor(Math.random() * 16);
-    card.style.order = randomOrder;
-  });
-})();
