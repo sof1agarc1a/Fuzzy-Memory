@@ -34,7 +34,6 @@ body {
   box-shadow: 0px 1px 7px #333333;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   position: absolute;
 }
@@ -42,14 +41,14 @@ body {
 .text-time {
   font-size: 60px;
   font-family: 'chewy', sans-serif;
-
+  margin-top: 40px;
 }
 
 .timer {
   width: 400px;
   height: 80px;
   margin-bottom: 20px;
-  font-family: 'chewy', sans-serif;
+  font-family: sans-serif;
   font-size: 60px;
   color: black;
   border-radius: 5px;
@@ -60,8 +59,19 @@ body {
 
 .scoreboard {
   width: 400px;
-  height: 540px;
+  height: auto;
   font-family: 'chewy', sans-serif;
+  font-size: 46px;
+  color: black;
+  border-radius: 5px;
+  display: flex;
+  padding-top: 40px;
+}
+
+.score {
+  width: 400px;
+  height: auto;
+  font-family: sans-serif;
   font-size: 38px;
   color: black;
   border-radius: 5px;
@@ -161,7 +171,7 @@ hr {
 }
 
 .winwin {
-  animation: win 5s 1;
+  animation: win 4.5s 1;
 }
 
 @keyframes win {

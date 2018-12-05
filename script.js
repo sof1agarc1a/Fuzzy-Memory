@@ -34,7 +34,7 @@ startGame.addEventListener('click', () => {
   const container = document.querySelector('.container');
 
   let points = 0;
-
+  let moves = 0;
 
   function addAnimation() {
     let newCards = document.querySelectorAll(".cards");
@@ -51,8 +51,6 @@ startGame.addEventListener('click', () => {
     replaceAll.forEach(replace => replace.classList.remove('replay-animation'));
   }, 2000);
 
-
-
   const shuffleCards = cardsDiv.sort(() => {
       return Math.random() - Math.random();
   });
@@ -68,14 +66,26 @@ startGame.addEventListener('click', () => {
   });
   const hideCards = document.querySelectorAll('.cards')
 
-
-  let count = 0;
-  const timer = () => {
-    count += 1;
-    minutes.innerHTML = Math.floor(count/60).toString().padStart(2, "0");
-    seconds.innerHTML = (count%60).toString().padStart(2, "0");
+  let count = 0, second = 0, minute = 0, hour = 0;
+  let timer = document.querySelector(".timer");
+  let interval;
+  function startTimer(){
+    interval = setInterval(function(){
+      count += 1;
+      minutes.innerHTML = Math.floor(count/60).toString().padStart(2, "0");
+      seconds.innerHTML = (count%60).toString().padStart(2, "0");
+    },1000);
   }
-  const getTime = setInterval(timer, 1000);
+  startTimer();
+
+  let score2 = document.querySelector(".scoreboard");
+  let time2 = document.querySelector(".time");
+  let moves2 = document.querySelector(".moves");
+  let result2 = document.querySelector(".result");
+  score2.classList.add('display');
+  time2.classList.add('display');
+  moves2.classList.add('display');
+  result2.classList.add('display');
 
   const cards = document.querySelectorAll('.cards');
   cards.forEach(card => card.addEventListener('click', clickCard));
@@ -106,11 +116,48 @@ startGame.addEventListener('click', () => {
         firstClick.classList.remove('card-click');
         secondClick.classList.remove('card-click');
         resetClick();
+        moves++;
     }, 900);
     } else {
       resetClick();
       points++;
-      if(points === 1) {
+      moves++;
+
+      if(points === 8) {
+        let minutes = document.querySelector(".minutes");
+        let seconds = document.querySelector(".seconds");
+        let time = document.querySelector(".time");
+        let moves2 = document.querySelector(".moves");
+        time.innerHTML = "Time: "+count+"s";
+        moves2.innerHTML = "Moves: "+ moves;
+
+        setTimeout(() => {
+          setTimeout(() => {
+            let score = document.querySelector(".scoreboard");
+            score.classList.remove('display');
+          }, 1000);
+          setTimeout(() => {
+            let time = document.querySelector(".time");
+            time.classList.remove('display');
+          }, 1400);
+          setTimeout(() => {
+            let moves = document.querySelector(".moves");
+            moves.classList.remove('display');
+          }, 1800);
+          setTimeout(() => {
+            let result = document.querySelector(".result");
+            result.classList.remove('display');
+          }, 2200);
+        }, 6000);
+
+        count = 0;
+        second = 0;
+        minute = 0;
+        hour = 0;
+        minutes.innerHTML = "00";
+        seconds.innerHTML = "00";
+        clearInterval(interval);
+
         function addClass() {
           let winwin = document.querySelectorAll(".cards");
           if(winwin[0]) {
@@ -128,11 +175,10 @@ startGame.addEventListener('click', () => {
           startGame.classList.remove('display');
           startGameNoDisplay.classList.remove('display');
           container.innerHTML = "";
-        }, 6000);
-
-        }
+        }, 5700);
       }
-    };
+    }
+  };
   function resetClick() {
     [clicked, disableClickCard] = [false, false];
     [firstClick, secondClick] = [null, null];
