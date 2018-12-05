@@ -5,31 +5,38 @@
 
 body {
   background-image: url("images/background.jpg");
+  background-image: url("images/background.jpg");
+  overflow: hidden;
+
+}
+
+.center {
+  width: 1450px;
+  margin: auto;
 }
 
 .wrapper {
-  width: 100%;
+  width: 1430px;
   display: flex;
   flex-direction: row;
   flex: 1fr 1fr;
   height: 100vh;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  overflow: hidden;
 }
 
 .startgame-wrapper {
   background-color: rgb(255, 192, 203, 0.4);
   width: 600px;
   height: 830px;
-  margin-right: 50px;
-  margin-bottom: 80px;
+  margin: 60px;
   border-radius: 8px;
   box-shadow: 0px 1px 7px #333333;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: absolute;
 }
 
 .text-time {
@@ -70,8 +77,8 @@ hr {
 
 .start-game {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 710px;
+  height: 790px;
   background-image: url('https://media1.tenor.com/images/ce0dc3d8787b3d1ce7d50dfcda7d9676/tenor.gif?itemid=5486197');
   background-repeat: no-repeat;
   background-size: 710px 790px;
@@ -83,24 +90,25 @@ hr {
 }
 
 .button, .replay-button {
-  width: 260px;
-  height: 80px;
+  width: 270px;
+  height: 98px;
   background-color: pink;
   border: none;
   font-family: 'chewy', sans-serif;
-  font-size: 40px;
+  font-size: 42px;
   color: black;
-  border-radius: 5px;
-  box-shadow: 0px 3px 7px black;
+  border-radius: 50%;
+  box-shadow: 0px 6px 1px black;
   display: initial;
   z-index: 3;
   margin-top: 50px;
-
+  transform: scale(1);
 }
 
 .button:hover {
-  box-shadow: 0px 5px 8px black;
   background-color: pink;
+  transform: scale(1.15);
+  transition: 0.1s;
 }
 
 .replay-button {
@@ -133,9 +141,9 @@ hr {
   grid-template-columns: repeat(4, 170px);
   grid-template-rows: repeat(4, 190px);
   width: 710px;
-  margin-bottom: 80px;
   grid-gap: 10px;
   perspective: 1000px;
+
 }
 
 .cards {
@@ -157,20 +165,14 @@ hr {
 }
 
 @keyframes win {
- 20%{transform: translateX(-1800px) translateY(0) scale(1) rotateX(-360deg)}
- 50%{transform: translateX(-2000px) translateY(-400px) rotateX(-360deg) scale(0.5)}
- 100%{transform:  translateX(-2000px) translateY(600px) scale(3.5)}
-}
-
-@keyframes win-dance {
- 30%{transform: translateX(-800px) scale(1) rotateX(-360deg)}
- 60%{transform: translateX(-600px) scale(0.7)}
- 85%{transform:  translateX(-600px) scale(3.5)}
- 100%{transform:  translateX(1000px) scale(3)}
+ 15%{transform: translateX(-1800px) translateY(-150px) scale(1) rotateX(-360deg)}
+ 30%{transform: translateX(-2000px) translateY(-400px) rotateX(-360deg) scale(0.6)}
+ 60%{transform: translateX(2000px) translateY(250px) rotateX(360deg) scale(1)}
+ 100%{transform:  translateX(-2500px) translateY(700px) scale(2.5)}
 }
 
 @keyframes replay {
-  0%{transform: translateX(-2000px) translateY(600px) scale(4) rotateY(-360deg)}
+  0%{transform: translateX(-2000px) translateY(600px) scale(4) rotateY(-180deg) rotateX(-180deg)}
   100%{transform: translateX(0) translateY(0) rotateY(0deg) rotateX(0deg) scale(1) }
 }
 
