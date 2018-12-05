@@ -16,8 +16,11 @@ Name|OS|Browser|Status
 [Sofia Garcia](https://github.com/sof1agarc1a "Sofia Garcia")|Windows 10 Home|Google Chrome v70.0.3538.102|Working
 [Sofia Garcia](https://github.com/sof1agarc1a "Sofia Garcia")|Windows 10 Home|Mozilla Firefox 63.0.3|Working
 [Sofia Garcia](https://github.com/sof1agarc1a "Sofia Garcia")|Windows 10 Home|Microsoft Edge 17.17134|Working
+[Fredrik Leemann](https://github.com/freddan88 "Fredrik Leemann GitHub")|macOS High Sierra v.10.13.6|Google Chrome Version 70.0.3538.110|Working
+[Fredrik Leemann](https://github.com/freddan88 "Fredrik Leemann GitHub")|macOS High Sierra v.10.13.6|Mozilla Firefox v64.0b4|Working
 [Bryan Strömberg]|MacBook Air|Google Chrome v70.0.3538.110|Working
 [Bryan Strömberg]|MacBook Air|Mozilla Firefox v64.0b8|Working
+
 
 Assignment 2 - Javascript
 Yrgo - Högre Yrkesutbildning Göteborg
